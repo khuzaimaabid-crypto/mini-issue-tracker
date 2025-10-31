@@ -1,0 +1,32 @@
+@tailwind base;       /* Tailwind's reset + base styles */
+@tailwind components; /* Tailwind's component classes */
+@tailwind utilities;  /* Tailwind's utility classes (bg-blue-500, etc.) */
+
+
+/**What are @tailwind directives?**
+- They're replaced by actual CSS during build
+- `@tailwind base` → Reset browser defaults
+- `@tailwind components` → Pre-made components
+- `@tailwind utilities` → All the `bg-*`, `text-*`, etc.
+
+**What's @layer?**
+- Organizes CSS into layers
+- Ensures proper order (base → components → utilities)
+- Your utilities can override components
+*/
+
+@layer base {
+  body {
+    @apply antialiased;
+  }
+}
+
+@layer utilities {
+  .line-clamp-2 {     /* Custom utility - limit text to 2 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}

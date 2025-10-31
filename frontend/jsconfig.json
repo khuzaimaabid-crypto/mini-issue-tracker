@@ -1,0 +1,19 @@
+{  
+  // JavaScript project configuration file  
+  "compilerOptions": {
+    "baseUrl": ".",      // Base directory for resolving non-relative module names
+    "paths": {           // path aliasing
+      "@/*": ["./src/*"]
+    },
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": false,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

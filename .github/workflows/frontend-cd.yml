@@ -1,0 +1,30 @@
+name: Frontend CD
+
+on:
+  workflow_run:
+    workflows: ["Frontend CI"]
+    types:
+      - completed
+    branches: [ main ]
+
+jobs:
+  deploy:
+    name: Deploy Frontend to Vercel
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
+      
+      - name: Deployment Success
+        if: success()
+        run: echo "✅ Frontend successfully deployed to Vercel!"
